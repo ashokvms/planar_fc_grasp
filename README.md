@@ -1,4 +1,5 @@
-# Force Closure Grasp Analysis for Planar Objects SE(2)
+# Force Closure Grasp Analysis 
+## for Planar Objects SE(2)
 
 * Functionalities
   * Grasp Analysis

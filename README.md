@@ -9,6 +9,7 @@
 
 * TODO
   * Grasp Analysis
+    * Force closure verification based on Minkowski sum
     * Force Closure Grasp Metrics
   * Planar Surfaces
     * Trianlgle, Rectangle, Circle

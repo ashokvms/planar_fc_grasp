@@ -103,19 +103,18 @@ class PlanarFCGrasp(object):
         
     def plot_hull_with_points(self, hull, points):
         fig = plt.figure()
-        
-        ax = fig.add_subplot(211, projection='3d')
-        ax.scatter(points[:,0], points[:,1], points[:,2])
-        ax.set_xlabel('Fx')
-        ax.set_ylabel('Fy')
-        ax.set_zlabel('Tau')
-        
-        bx = fig.add_subplot(212, projection='3d')       
+        cx = fig.add_subplot(111, projection='3d')
+        cx.scatter(points[:,0], points[:,1], points[:,2],color='black',marker='*',s=100)
         for simplex in hull.simplices:
-            bx.plot(points[simplex, 0], points[simplex, 1], points[simplex, 2], 'k-')
-        bx.set_xlabel('Fx')
-        bx.set_ylabel('Fy')
-        bx.set_zlabel('Tau')
+            xs, ys, zs = points[simplex].T
+            xs = np.r_[xs, xs[0]] # close polygons
+            ys = np.r_[ys, ys[0]]
+            zs = np.r_[zs, zs[0]]
+            cx.plot(xs, ys, zs)
+        cx.set_xlabel('Fx')
+        cx.set_ylabel('Fy')
+        cx.set_zlabel('Tau')
+        
             
 def main():
     planar_fc_grasp = PlanarFCGrasp()

@@ -81,7 +81,19 @@ class PlanarFCGrasp(object):
         cx = np.mean(hull.points[hull.vertices,0])
         cy = np.mean(hull.points[hull.vertices,1])
         cz = np.mean(hull.points[hull.vertices,2])
-        return np.array([[cx,cy,cz]])
+        return np.array([cx,cy,cz])
+        
+    def get_point_to_plane_distance(self,plane,point):
+        return (point[0]*plane[0] + point[1]*plane[1] + point[2]*plane[2] + plane[3])/np.sqrt(np.power(plane[0],2)+np.power(plane[1],2)+np.power(plane[2],2))
+    
+    def is_point_inside_hull(self, hull, point):
+        centroid = self.get_centroid_of_hull(hull)
+        for plane in hull.equations:
+            distance_to_point = self.get_point_to_plane_distance(plane,point)
+            distance_to_centroid = self.get_point_to_plane_distance(plane,centroid)
+            if((distance_to_point>0.0 and distance_to_centroid<0.0) or (distance_to_point<0.0 and distance_to_centroid>0.0)):
+                return False
+        return True
         
     def is_hulls_same(self, hull1, hull2):
         return np.array_equal(hull1.vertices,hull2.vertices)

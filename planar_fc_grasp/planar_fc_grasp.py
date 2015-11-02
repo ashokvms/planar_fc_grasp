@@ -76,6 +76,12 @@ class PlanarFCGrasp(object):
     def get_convex_hull(self, points):
         hull = ConvexHull(points)
         return hull
+    
+    def get_centroid_of_hull(self, hull):
+        cx = np.mean(hull.points[hull.vertices,0])
+        cy = np.mean(hull.points[hull.vertices,1])
+        cz = np.mean(hull.points[hull.vertices,2])
+        return np.array([[cx,cy,cz]])
         
     def is_hulls_same(self, hull1, hull2):
         return np.array_equal(hull1.vertices,hull2.vertices)

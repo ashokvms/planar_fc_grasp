@@ -41,6 +41,8 @@ for i in range(len(contact_locations)):
 hull = pg.get_convex_hull(wrench_at_contacts)
 hull_with_origin = pg.get_convex_hull(np.vstack((wrench_at_contacts,np.array([[0,0,0]]))))
 
+hull_centroid = pg.get_centroid_of_hull(hull)
+
 is_force_closure = pg.is_hulls_same(hull,hull_with_origin)
 
 if is_force_closure:

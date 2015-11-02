@@ -95,6 +95,13 @@ class PlanarFCGrasp(object):
                 return False
         return True
         
+    def get_distance_to_nearest_hull_simplex(self,hull,point):
+        distance = []
+        for plane in hull.equations:
+            distance.append(np.fabs(self.get_point_to_plane_distance(plane,point)))
+        distance = map(float, distance)
+        return min(distance)
+        
     def is_hulls_same(self, hull1, hull2):
         return np.array_equal(hull1.vertices,hull2.vertices)
 
@@ -126,7 +133,7 @@ class PlanarFCGrasp(object):
         cx.set_xlabel('Fx')
         cx.set_ylabel('Fy')
         cx.set_zlabel('Tau')
-        
+
             
 def main():
     planar_fc_grasp = PlanarFCGrasp()

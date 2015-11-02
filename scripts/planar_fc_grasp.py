@@ -52,6 +52,7 @@ else:
 
 if pg.is_point_inside_hull(hull,np.array([0,0,0])):
     print 'GRASP IS FORCE CLOSURE'
+    print 'Force closure grasp metric: ', pg.get_distance_to_nearest_hull_simplex(hull,np.array([0,0,0]))
 else:
     print 'GRASP IS NOT FORCE CLOSURE'
 

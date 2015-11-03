@@ -74,6 +74,22 @@ class PlanarFCGrasp(object):
         total_wrench = np.dot(np.dot(transformation, wrench_basis),force_at_contact)        
         return total_wrench.transpose(1,0)
         
+    def get_minkowski_sum_of_wrenches(self,contact_wise_wrenches):
+        minkowski_sum = []
+        for i in range (len(contact_wise_wrenches)-1):
+            if (i==0):
+                minkowski_sum = self.get_minkowski_sum(contact_wise_wrenches[i], contact_wise_wrenches[i+1])
+            else:
+                minkowski_sum = self.get_minkowski_sum(minkowski_sum, contact_wise_wrenches[i+1])
+        return minkowski_sum
+        
+    def get_minkowski_sum(self, set1, set2):
+        minkowski_sum = []        
+        for vector1 in set1:
+            for vector2 in set2:
+                minkowski_sum.append(vector1+vector2)
+        return minkowski_sum
+               
     def get_convex_hull(self, points):
         hull = ConvexHull(points)
         return hull

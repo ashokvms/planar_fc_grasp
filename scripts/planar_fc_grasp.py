@@ -14,10 +14,10 @@ except:
 
 origin = np.array([[0.0,0.0]])
 major_axis_length = 4.0
-minor_axis_length = 1.0
+minor_axis_length = 2.0
 number_of_ellipse_points = 360
 contact_locations = [45,90,225,325]
-force_at_contact_locations = np.array([[10],[10],[10],[10]])
+force_at_contact_locations = np.array([[1],[1],[1],[1]])
 friction_coefficient = 0.5
 
 pg = planar_fc_grasp.PlanarFCGrasp()

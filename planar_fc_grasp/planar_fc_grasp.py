@@ -3,7 +3,7 @@
 __author__ = 'ashok'
 
 import numpy as np
-from pylab import plot, quiver
+from pylab import plot, quiver, axis
 import matplotlib.pyplot as plt
 from scipy.spatial import ConvexHull
 
@@ -127,6 +127,7 @@ class PlanarFCGrasp(object):
         Plots the given 2D array of points 
         """
         plot(pts[:,0], pts[:,1])
+        axis('equal')
 
     def plot_2d_points(self, pts=np.zeros((1, 2))):
         """

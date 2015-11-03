@@ -65,11 +65,12 @@ class PlanarFCGrasp(object):
         return np.arccos(dotproduct(v1, v2) / (length(v1) * length(v2)))
         
     def get_wrench_at_contacts(self,theta, point, force, friction_coeff):
+        theta = theta + np.arctan(-friction_coeff)
         rot = np.matrix([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
         position = np.matrix([[-point[1],point[0]]])
         transformation = np.matrix([ [rot[0,0],rot[0,1],0], [rot[1,0],rot[1,1],0], [np.dot(position,rot)[0,0],np.dot(position,rot)[0,1],1] ])
         wrench_basis = np.matrix([[1,0], [0,1], [0,0]])
-        force_at_contact = np.matrix([[force], [force*friction_coeff]])
+        force_at_contact = np.matrix([[force*friction_coeff], [force]])
         total_wrench = np.dot(np.dot(transformation, wrench_basis),force_at_contact)        
         return total_wrench.transpose(1,0)
         

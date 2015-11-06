@@ -50,14 +50,14 @@ minkowski_hull = pg.get_convex_hull(minkowski_sum_of_wrenches)
         
 
 
-print 'Object Wrench Space'
+print '\n Object Wrench Space'
 if pg.is_point_inside_hull(hull,np.array([0,0,0])):
     print 'GRASP IS FORCE CLOSURE'
     print 'Force closure grasp metric: ', pg.get_distance_to_nearest_hull_simplex(hull,np.array([0,0,0]))
 else:
     print 'GRASP IS NOT FORCE CLOSURE'
     
-print 'Minkowski Sum of Object Wrenches'
+print '\n Minkowski Sum of Object Wrenches'
 if pg.is_point_inside_hull(minkowski_hull,np.array([0,0,0])):
     print 'GRASP IS FORCE CLOSURE'
     print 'Force closure grasp metric: ', pg.get_distance_to_nearest_hull_simplex(minkowski_hull,np.array([0,0,0]))

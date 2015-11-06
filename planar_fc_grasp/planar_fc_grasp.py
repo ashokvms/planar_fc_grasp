@@ -82,7 +82,7 @@ class PlanarFCGrasp(object):
                 minkowski_sum = self.get_minkowski_sum(contact_wise_wrenches[i], contact_wise_wrenches[i+1])
             else:
                 minkowski_sum = self.get_minkowski_sum(minkowski_sum, contact_wise_wrenches[i+1])
-        return minkowski_sum
+        return np.asarray(minkowski_sum)
         
     def get_minkowski_sum(self, set1, set2):
         minkowski_sum = []        

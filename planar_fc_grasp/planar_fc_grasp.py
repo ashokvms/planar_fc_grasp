@@ -7,6 +7,7 @@ from pylab import plot, quiver, axis
 import matplotlib.pyplot as plt
 from scipy.spatial import ConvexHull
 from mpl_toolkits.mplot3d import Axes3D
+import itertools
 
 class PlanarFCGrasp(object):
     
@@ -83,6 +84,17 @@ class PlanarFCGrasp(object):
             else:
                 minkowski_sum = self.get_minkowski_sum(minkowski_sum, contact_wise_wrenches[i+1])
         return np.asarray(minkowski_sum)
+        
+    def get_combinatorial_minkowski_sum_of_wrenches(self, contact_wise_wrenches):
+        minkowski_sum = []
+        for i in range (len(contact_wise_wrenches)):
+            possible_combinations = list(itertools.combinations(contact_wise_wrenches,i+1))
+            if len(possible_combinations[0]) == 1:
+                minkowski_sum.append(list(itertools.chain.from_iterable(list(itertools.chain.from_iterable(possible_combinations)))))
+            else:
+                for j in range (len(possible_combinations)):
+                    minkowski_sum.append(self.get_minkowski_sum_of_wrenches(possible_combinations[j]))
+        return np.asarray(list(itertools.chain.from_iterable(minkowski_sum)))
         
     def get_minkowski_sum(self, set1, set2):
         minkowski_sum = []        

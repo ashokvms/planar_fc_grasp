@@ -49,6 +49,8 @@ minkowski_sum_of_wrenches = np.vstack((minkowski_sum_of_wrenches,wrench_at_conta
 minkowski_hull = pg.get_convex_hull(minkowski_sum_of_wrenches)
         
 
+minkowski_combi_sum_of_wrenches = pg.get_combinatorial_minkowski_sum_of_wrenches(contact_wise_wrenches)       
+minkowski_combi_hull = pg.get_convex_hull(minkowski_combi_sum_of_wrenches)
 
 print '\n Object Wrench Space'
 if pg.is_point_inside_hull(hull,np.array([0,0,0])):
@@ -64,6 +66,13 @@ if pg.is_point_inside_hull(minkowski_hull,np.array([0,0,0])):
 else:
     print 'GRASP IS NOT FORCE CLOSURE'
 
+print '\n Combinatorial Minkowski Sum of Object Wrenches'
+if pg.is_point_inside_hull(minkowski_combi_hull,np.array([0,0,0])):
+    print 'GRASP IS FORCE CLOSURE'
+    print 'Force closure grasp metric: ', pg.get_distance_to_nearest_hull_simplex(minkowski_hull,np.array([0,0,0]))
+else:
+    print 'GRASP IS NOT FORCE CLOSURE'
+    
 '''    
 hull_with_origin = pg.get_convex_hull(np.vstack((minkowski_sum_of_wrenches,np.array([[0,0,0]]))))
 is_force_closure = pg.is_hulls_same(minkowski_hull,hull_with_origin)
@@ -79,3 +88,4 @@ pg.plot_2d_points(np.vstack((contact_pts,origin)))
 pg.plot_normals_at_points(normals_at_contacts,contact_pts)
 pg.plot_hull_with_points(hull,wrench_at_contacts)
 pg.plot_hull_with_points(minkowski_hull,minkowski_sum_of_wrenches)
+pg.plot_hull_with_points(minkowski_combi_hull,minkowski_combi_sum_of_wrenches)

@@ -45,6 +45,7 @@ for i in range(len(contact_locations)):
 hull = pg.get_convex_hull(wrench_at_contacts)
 
 minkowski_sum_of_wrenches = np.asarray(pg.get_minkowski_sum_of_wrenches(contact_wise_wrenches))
+minkowski_sum_of_wrenches = np.vstack((minkowski_sum_of_wrenches,wrench_at_contacts))
 minkowski_hull = pg.get_convex_hull(minkowski_sum_of_wrenches)
         
 

@@ -6,6 +6,7 @@ import numpy as np
 from pylab import plot, quiver, axis
 import matplotlib.pyplot as plt
 from scipy.spatial import ConvexHull
+from mpl_toolkits.mplot3d import Axes3D
 
 class PlanarFCGrasp(object):
     
@@ -142,6 +143,7 @@ class PlanarFCGrasp(object):
         fig = plt.figure()
         cx = fig.add_subplot(111, projection='3d')
         cx.scatter(points[:,0], points[:,1], points[:,2],color='black',marker='*',s=100)
+        cx.scatter(0, 0, 0,color='red',marker='o',s=100)
         for simplex in hull.simplices:
             xs, ys, zs = points[simplex].T
             xs = np.r_[xs, xs[0]] # close polygons
